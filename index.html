@@ -9,6 +9,10 @@
 
     <link
       rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <link
+      rel="stylesheet"
       href="./assets/styles/style.css"
     />
 
@@ -18,10 +22,103 @@
       defer
     ></script>
 
-    <title>Block Explorer</title>
+    <title>Xolmis</title>
   </head>
 
   <body>
-    <h1>Block Explorer</h1>
+    <main>
+      <header>
+        <a href="/">
+          <!-- <img
+            src=""
+            alt=""
+            width="50"
+            height="50"
+            loading="lazy"
+          /> -->
+          <i class="bi-app-indicator"></i>
+
+          <h1>Xolmis</h1>
+        </a>
+      </header>
+
+      <section id="balance-section">
+        <h2>Explorer</h2>
+
+        <form>
+          <div>
+            <label for="">Wallet</label>
+
+            <input
+              type="text"
+              id=""
+              placeholder="Enter your wallet address here..."
+              required
+            />
+          </div>
+
+          <div>
+            <button type="submit">Check Balance</button>
+          </div>
+        </form>
+
+        <section>
+          <h3>Current Balance</h3>
+
+          <p>You haven't entered a wallet address yet...</p>
+        </section>
+      </section>
+
+      <section id="transaction-section">
+        <h2>Exchanger</h2>
+
+        <form>
+          <div>
+            <label for="">Sender</label>
+
+            <input
+              type="text"
+              id=""
+              placeholder="Enter your wallet address here..."
+              required
+            />
+          </div>
+
+          <div>
+            <label for="">Amount</label>
+
+            <input
+              type="number"
+              id=""
+              placeholder="1.0 ETH"
+              required
+            />
+          </div>
+
+          <div>
+            <label for="">Receiver</label>
+
+            <input
+              type="text"
+              id=""
+              placeholder="Enter the receivers wallet address here..."
+              required
+            />
+          </div>
+
+          <div>
+            <button type="submit">Send Transaction</button>
+          </div>
+        </form>
+
+        <section>
+          <h3></h3>
+        </section>
+      </section>
+
+      <footer>
+        <p>Xolmis &copy; 2024</p>
+      </footer>
+    </main>
   </body>
 </html>
