@@ -17,80 +17,91 @@
     />
 
     <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/web3/4.5.0/web3.min.js"
+      integrity="sha512-FhAl50BpK3gf9K//lbAWek9EEQEtGQyyXZNc1fuwcC2tVf2cskiJBcumXY0zJksYtms6S5cqubp1MNfUYTkO2A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://kit.fontawesome.com/1a15ffbffa.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
       type="module"
       src="./scripts/lib/app.js"
       defer
     ></script>
 
-    <title>Xolmis</title>
+    <title>Kiwi | Block Explorer</title>
   </head>
 
   <body>
     <main>
       <header>
         <a href="/">
-          <!-- <img
-            src=""
-            alt=""
-            width="50"
-            height="50"
-            loading="lazy"
-          /> -->
-          <i class="bi-app-indicator"></i>
+          <!-- <i class="bi-app-indicator"></i> -->
+          <span><i class="fa-solid fa-kiwi-bird"></i></span>
 
-          <h1>Xolmis</h1>
+          <h1>Kiwi</h1>
         </a>
       </header>
 
-      <section id="balance-section">
+      <section class="balance-section">
         <h2>Explorer</h2>
 
-        <form>
+        <div class="form">
           <div>
-            <label for="">Wallet</label>
+            <label for="wallet-address">Wallet</label>
 
             <input
               type="text"
-              id=""
+              id="wallet-address"
               placeholder="Enter your wallet address here..."
               required
             />
           </div>
 
           <div>
-            <button type="submit">Check Balance</button>
+            <button id="check-balance">Check Balance</button>
           </div>
-        </form>
+        </div>
 
         <section>
-          <h3>Current Balance</h3>
+          <h3>Balance</h3>
 
-          <p>You haven't entered a wallet address yet...</p>
+          <p id="balance-display">
+            You haven't entered a wallet address yet...
+          </p>
+        </section>
+
+        <section>
+          <h3>History</h3>
+          <p>No history has been recorded yet...</p>
         </section>
       </section>
 
-      <section id="transaction-section">
+      <section class="transaction-section">
         <h2>Exchanger</h2>
 
-        <form>
+        <div class="form">
           <div>
             <label for="">Sender</label>
 
             <input
               type="text"
               id=""
-              placeholder="Enter your wallet address here..."
+              placeholder="Enter the senders wallet address here..."
               required
             />
           </div>
 
           <div>
-            <label for="">Amount</label>
+            <label for="">Ether</label>
 
             <input
               type="number"
               id=""
-              placeholder="1.0 ETH"
+              placeholder="1.0"
               required
             />
           </div>
@@ -109,15 +120,11 @@
           <div>
             <button type="submit">Send Transaction</button>
           </div>
-        </form>
-
-        <section>
-          <h3></h3>
-        </section>
+        </div>
       </section>
 
       <footer>
-        <p>Xolmis &copy; 2024</p>
+        <p>Kiwi &copy; 2024</p>
       </footer>
     </main>
   </body>
