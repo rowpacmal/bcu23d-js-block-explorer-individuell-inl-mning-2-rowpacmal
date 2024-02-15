@@ -1,58 +1,69 @@
-const web3 = new Web3(
-  'https://sepolia.infura.io/v3/da5525411c684234a40d9f40b756f285'
-);
-
 const walletAddressInput = document.querySelector('#wallet-address');
 const checkBalanceButton = document.querySelector('#check-balance');
 const balanceDisplay = document.querySelector('#balance-display');
 const historyDisplay = document.querySelector('#block-display');
+const senderAddressInput = document.querySelector('#sender-address');
+const transactionAmountInput = document.querySelector('#transaction-amount');
+const receiverAddressInput = document.querySelector('#receiver-address');
+const sendTransactionButton = document.querySelector('#send-transaction');
 
-async function initApp() {}
+function initApp() {
+  if (typeof ethereum !== 'undefined') {
+    console.info('MetaMask is installed!');
+  } else {
+    console.warn('MetaMask is not installed!');
+  }
+}
 
 async function checkWallet() {
-  /*   const address = walletAddressInput.value;
-  const balance = await web3.eth.getBalance(address);
-  const toEther = web3.utils.fromWei(balance, 'ether').split('.');
+  if (typeof ethereum !== 'undefined') {
+    await ethereum.request({ method: 'eth_requestAccounts' });
 
-  balanceDisplay.innerHTML = `<i class="fa-brands fa-ethereum"></i> ${toEther[0]}<span class="faded-txt">.${toEther[1]}</span> ETH`;
+    const balance = await ethereum.request({
+      method: 'eth_getBalance',
+      params: [walletAddressInput.value, 'latest'],
+    });
 
-  const block = await web3.eth.getBlock('latest');
-  const transactions = block.transactions;
+    const parseBalance = parseInt(balance) / Math.pow(10, 18);
 
-  if (block !== null && transactions !== null) {
-    console.log(block);
-    displayHistory(transactions.slice(0, 10));
-  } */
-}
+    balanceDisplay.innerHTML = `<i class="fa-brands fa-ethereum"></i> ${parseBalance} ETH`;
 
-/* async function displayHistory(transactions) {
-  historyDisplay.innerHTML = 'Loading...';
-  const history = [];
+    const block = await ethereum.request({
+      method: 'eth_getBlockByNumber',
+      params: ['latest', true],
+    });
 
-  for (let hash of transactions) {
-    const transaction = await web3.eth.getTransaction(hash);
-    const obj = {
-      from: transaction.from,
-      to: transaction.to,
-      value: web3.utils.fromWei(transaction.value, 'ether'),
-    };
-
-    history.push(obj);
+    const transactions = block.transactions;
+    console.log(transactions);
   }
-
-  historyDisplay.innerHTML = '';
-
-  history.forEach((transaction) => {
-    createHistory(transaction);
-  });
 }
 
-function createHistory(transaction) {
-  historyDisplay.innerHTML += `  
-    <span>From: ${transaction.from}</span><br />
-    <span>To: ${transaction.to}</span><br />
-    <span>Amount: ${transaction.value} ETH</span><br /><br />`;
-} */
+async function sendFunds() {
+  if (typeof ethereum !== 'undefined') {
+    await ethereum.request({ method: 'eth_requestAccounts' });
+
+    try {
+      const fund = parseFloat(transactionAmountInput.value) * Math.pow(10, 18);
+      const response = await ethereum.request({
+        method: 'eth_sendTransaction',
+        params: [
+          {
+            to: receiverAddressInput.value,
+            from: senderAddressInput.value,
+            value: Number(fund).toString(16),
+            gas: Number(21000).toString(16),
+            gasPrice: Number(2502020).toString(16),
+          },
+        ],
+      });
+
+      console.info(response);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+}
 
 document.addEventListener('DOMContentLoaded', initApp);
 checkBalanceButton.addEventListener('click', checkWallet);
+sendTransactionButton.addEventListener('click', sendFunds);
