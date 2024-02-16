@@ -30,7 +30,7 @@ body {
   background-color: var(--color0);
   background-image: url('../images/eberhard-grossgasteiger-QcmwbZsQuro-unsplash.webp');
   background-repeat: no-repeat;
-  background-size: cover;
+  background-position: center -300px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   min-height: 100vh;
 }
@@ -77,8 +77,7 @@ button {
   background-color: var(--color1);
 }
 
-button:hover,
-button:focus {
+button:hover {
   color: var(--color0);
   background-color: var(--color3);
   scale: 1.1;
@@ -117,7 +116,7 @@ button:active {
     border-bottom: 2px solid var(--color5);
     padding-left: 1rem;
     padding-bottom: 0.25rem;
-    text-shadow: 0 0 0.5rem var(--color0);
+    text-shadow: 0 0 3px var(--color0);
     filter: drop-shadow(0 0 0.5rem var(--color1));
   }
 
@@ -125,7 +124,7 @@ button:active {
     text-transform: uppercase;
     letter-spacing: 0.5rem;
     padding-left: 0.5rem;
-    text-shadow: 0 0 0.5rem var(--color0);
+    text-shadow: 0 0 3px var(--color0);
     filter: drop-shadow(0 0 0.5rem var(--color1));
     text-wrap: nowrap;
   }
@@ -188,6 +187,12 @@ button:active {
   border-radius: 0.5rem;
 }
 
+#display-history {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
 .copyright {
   color: var(--color5);
   text-align: center;
@@ -196,7 +201,7 @@ button:active {
   user-select: none;
 
   p {
-    text-shadow: 0 0 0.5rem var(--color0);
+    text-shadow: 0 0 3px var(--color0);
     filter: drop-shadow(0 0 0.5rem var(--color1));
   }
 }

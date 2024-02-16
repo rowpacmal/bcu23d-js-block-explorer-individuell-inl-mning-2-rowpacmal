@@ -1,96 +1,38 @@
-const walletAddressInput = document.querySelector('#wallet-address');
 const checkBalanceButton = document.querySelector('#check-balance');
-const balanceDisplay = document.querySelector('#balance-display');
-const historyDisplay = document.querySelector('#block-display');
+const balanceDisplay = document.querySelector('#balance');
+const historyDisplay = document.querySelector('#display-history');
 const senderAddressInput = document.querySelector('#sender-address');
-const transactionAmountInput = document.querySelector('#transaction-amount');
+const transactionAmountInput = document.querySelector('#amount');
 const receiverAddressInput = document.querySelector('#receiver-address');
-const sendTransactionButton = document.querySelector('#send-transaction');
-
-let test = null;
-test = true;
-
-if (test) {
-  console.log('ok');
-} else {
-  console.log('no');
-}
+const sendTransactionButton = document.querySelector('#send-funds');
+const currentBlock = document.querySelector('#block-number');
+const checkBlockButton = document.querySelector('#check-block');
 
 async function initApp() {
   if (typeof ethereum !== 'undefined') {
     console.info('MetaMask is installed!');
-
-    const wallet = await ethereum.request({ method: 'eth_requestAccounts' });
-
-    if (wallet) {
-      console.info('Wallet is connected!');
-    }
   } else {
     console.warn('MetaMask is not installed!');
   }
 }
 
-/* async function checkCurrentBlock() {
-  const blockNum = await ethereum.request({
-    method: 'eth_blockNumber',
-  });
-  console.log(parseInt(blockNum));
-}
-
-setInterval(checkCurrentBlock, 5000); */
-
 async function checkWallet() {
   if (typeof ethereum !== 'undefined') {
     await ethereum.request({ method: 'eth_requestAccounts' });
 
-    if (walletAddressInput.value) {
+    if (senderAddressInput.value) {
       const balance = await ethereum.request({
         method: 'eth_getBalance',
-        params: [walletAddressInput.value, 'latest'],
+        params: [senderAddressInput.value, 'latest'],
       });
 
       const parseBalance = parseInt(balance) / Math.pow(10, 18);
 
-      balanceDisplay.innerHTML = `<i class="fa-brands fa-ethereum"></i> ${parseBalance} ETH`;
-
-      const block = await ethereum.request({
-        method: 'eth_getBlockByNumber',
-        params: ['latest', true],
-      });
-
-      const blockNumber = parseInt(block.number);
-      const transactions = block.transactions;
-
-      if (block !== null && transactions !== null) {
-        displayHistory(transactions);
-      }
+      balanceDisplay.innerText = parseBalance.toFixed(4);
     } else {
-      console.warn('Warning: "Explorer" has an empty field!');
+      balanceDisplay.innerText = '0.00';
     }
   }
-}
-
-async function displayHistory(transactions) {
-  historyDisplay.innerHTML = '';
-
-  for (let transaction of transactions) {
-    createTransactionList(transaction);
-  }
-}
-
-function createTransactionList(transaction) {
-  const parseBlock = parseInt(transaction.blockNumber);
-  const parseValue = parseInt(transaction.value) / Math.pow(10, 18);
-
-  historyDisplay.innerHTML += `
-    <span>Block: ${parseBlock}</span>
-    <br />
-    <span>From: ${transaction.from}</span>
-    <br />
-    <span>To: ${transaction.to}</span>
-    <br />
-    <span><i class="fa-brands fa-ethereum"></i> ${parseValue} ETH</span>
-    <br /><br />`;
 }
 
 async function sendFunds() {
@@ -123,12 +65,56 @@ async function sendFunds() {
       } catch (error) {
         console.error(error);
       }
-    } else {
-      console.warn('Warning: "Exchanger" has one or more empty fields!');
     }
   }
+}
+
+async function blockExplorer() {
+  const block = await ethereum.request({
+    method: 'eth_getBlockByNumber',
+    params: ['latest', true],
+  });
+
+  const blockNumber = parseInt(block.number);
+  const transactions = block.transactions;
+
+  if (block !== null && transactions !== null) {
+    currentBlock.innerText = blockNumber;
+    displayHistory(transactions);
+  }
+}
+
+function displayHistory(transactions) {
+  historyDisplay.innerHTML = '';
+
+  for (let transaction of transactions) {
+    createTransactionList(transaction);
+  }
+}
+
+function createTransactionList(transaction) {
+  const parseValue = parseInt(transaction.value) / Math.pow(10, 18);
+
+  historyDisplay.innerHTML += `
+    <div class="block-container">
+      <span>
+        From: ${transaction.from}
+      </span>
+
+      <span>
+        To: ${transaction.to}
+      </span>
+
+      <span>
+        Trx:
+        <i class="fa-brands fa-ethereum"></i>
+        ${parseValue.toFixed(4)} ETH
+      </span>
+    </div>
+    `;
 }
 
 document.addEventListener('DOMContentLoaded', initApp);
 checkBalanceButton.addEventListener('click', checkWallet);
 sendTransactionButton.addEventListener('click', sendFunds);
+checkBlockButton.addEventListener('click', blockExplorer);
