@@ -7,13 +7,22 @@ const transactionAmountInput = document.querySelector('#transaction-amount');
 const receiverAddressInput = document.querySelector('#receiver-address');
 const sendTransactionButton = document.querySelector('#send-transaction');
 
-function initApp() {
+async function initApp() {
   if (typeof ethereum !== 'undefined') {
     console.info('MetaMask is installed!');
   } else {
     console.warn('MetaMask is not installed!');
   }
 }
+
+/* async function checkCurrentBlock() {
+  const blockNum = await ethereum.request({
+    method: 'eth_blockNumber',
+  });
+  console.log(parseInt(blockNum));
+}
+
+setInterval(checkCurrentBlock, 5000); */
 
 async function checkWallet() {
   if (typeof ethereum !== 'undefined') {
@@ -33,9 +42,36 @@ async function checkWallet() {
       params: ['latest', true],
     });
 
+    const blockNumber = parseInt(block.number);
     const transactions = block.transactions;
-    console.log(transactions);
+
+    if (block !== null && transactions !== null) {
+      displayHistory(transactions);
+    }
   }
+}
+
+async function displayHistory(transactions) {
+  historyDisplay.innerHTML = '';
+
+  for (let transaction of transactions) {
+    createTransactionList(transaction);
+  }
+}
+
+function createTransactionList(transaction) {
+  const parseBlock = parseInt(transaction.blockNumber);
+  const parseValue = parseInt(transaction.value) / Math.pow(10, 18);
+
+  historyDisplay.innerHTML += `
+    <span>Block: ${parseBlock}</span>
+    <br />
+    <span>From: ${transaction.from}</span>
+    <br />
+    <span>To: ${transaction.to}</span>
+    <br />
+    <span><i class="fa-brands fa-ethereum"></i> ${parseValue} ETH</span>
+    <br /><br />`;
 }
 
 async function sendFunds() {
