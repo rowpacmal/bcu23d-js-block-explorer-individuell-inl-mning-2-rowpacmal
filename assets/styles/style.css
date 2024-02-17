@@ -16,7 +16,7 @@
 :root {
   --color0: #0a0a0a;
   --color1: #282d2d;
-  --color2: #6c5543;
+  --color2: #653e20;
   --color3: #e38741;
   --color4: #8c7d6c;
   --color5: #e8e2df;
@@ -78,13 +78,14 @@ button {
 }
 
 button:hover {
-  color: var(--color0);
+  color: var(--color5);
   background: linear-gradient(180deg, var(--color3), var(--color2));
   scale: 1.1;
 }
 
 button:active {
   color: var(--color5);
+  filter: brightness(0.7);
   scale: 1;
 }
 
@@ -176,6 +177,12 @@ button:active {
   gap: 1rem;
 }
 
+.button-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
 .block-container {
   display: flex;
   flex-direction: column;
@@ -221,10 +228,13 @@ button:active {
   }
 
   .be-header {
-    display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+  }
+
+  .button-container {
+    justify-content: space-between;
   }
 }
 

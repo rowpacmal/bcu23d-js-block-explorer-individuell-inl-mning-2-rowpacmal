@@ -7,6 +7,7 @@ const receiverAddressInput = document.querySelector('#receiver-address');
 const sendTransactionButton = document.querySelector('#send-funds');
 const currentBlock = document.querySelector('#block-number');
 const checkBlockButton = document.querySelector('#check-block');
+const clearBlockButton = document.querySelector('#clear-block');
 
 async function initApp() {
   if (typeof ethereum !== 'undefined') {
@@ -108,7 +109,19 @@ function createTransactionList(transaction) {
       <span>
         Trx:
         <i class="fa-brands fa-ethereum"></i>
-        ${parseValue.toFixed(4)} ETH
+        ${+parseValue} ETH
+      </span>
+    </div>
+    `;
+}
+
+function clearBlockExplorer() {
+  currentBlock.innerText = 'XXXXXXX';
+
+  historyDisplay.innerHTML = `
+    <div class="block-container">
+      <span>
+        No history has been recorded yet...
       </span>
     </div>
     `;
@@ -118,3 +131,4 @@ document.addEventListener('DOMContentLoaded', initApp);
 checkBalanceButton.addEventListener('click', checkWallet);
 sendTransactionButton.addEventListener('click', sendFunds);
 checkBlockButton.addEventListener('click', blockExplorer);
+clearBlockButton.addEventListener('click', clearBlockExplorer);
