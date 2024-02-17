@@ -5,9 +5,12 @@ const senderAddressInput = document.querySelector('#sender-address');
 const transactionAmountInput = document.querySelector('#amount');
 const receiverAddressInput = document.querySelector('#receiver-address');
 const sendTransactionButton = document.querySelector('#send-funds');
+const searchBarInput = document.querySelector('#search-bar');
+const searchButton = document.querySelector('#search');
 const currentBlock = document.querySelector('#block-number');
 const checkBlockButton = document.querySelector('#check-block');
 const clearBlockButton = document.querySelector('#clear-block');
+const blockList = [];
 
 async function initApp() {
   if (typeof ethereum !== 'undefined') {
@@ -70,10 +73,10 @@ async function sendFunds() {
   }
 }
 
-async function blockExplorer() {
+async function searchBlock() {
   const block = await ethereum.request({
     method: 'eth_getBlockByNumber',
-    params: ['latest', true],
+    params: ['0x' + Number(searchBarInput.value).toString(16), true],
   });
 
   const blockNumber = parseInt(block.number);
@@ -81,7 +84,17 @@ async function blockExplorer() {
 
   if (block !== null && transactions !== null) {
     currentBlock.innerText = blockNumber;
-    displayHistory(transactions);
+    if (transactions.length) {
+      displayHistory(transactions);
+    } else {
+      historyDisplay.innerHTML = `
+        <div class="block-container">
+          <span>
+            No history has been recorded yet...
+          </span>
+        </div>
+        `;
+    }
   }
 }
 
@@ -99,23 +112,96 @@ function createTransactionList(transaction) {
   historyDisplay.innerHTML += `
     <div class="block-container">
       <span>
-        From: ${transaction.from}
+        <i class="fa-solid fa-right-from-bracket"></i> ${transaction.from}
       </span>
 
       <span>
-        To: ${transaction.to}
+        <i class="fa-solid fa-right-to-bracket"></i> ${transaction.to}
       </span>
 
       <span>
-        Trx:
-        <i class="fa-brands fa-ethereum"></i>
-        ${+parseValue} ETH
+        <i class="fa-solid fa-receipt"></i>
+        <i class="fa-brands fa-ethereum"></i> ${+parseValue} ETH
+      </span>
+    </div>
+    `;
+}
+
+async function getBlocks() {
+  currentBlock.innerText = 'Loading...';
+
+  if (typeof ethereum !== 'undefined') {
+    if (blockList.length > 0) {
+      const lastEntry = blockList.at(-1).number;
+
+      for (let i = lastEntry - 1; i > lastEntry - 11; i--) {
+        const block = await ethereum.request({
+          method: 'eth_getBlockByNumber',
+          params: ['0x' + Number(i).toString(16), true],
+        });
+
+        console.log(parseInt(block.number));
+
+        blockList.push({
+          number: block.number,
+          hash: block.hash,
+        });
+      }
+
+      console.log(blockList);
+    } else {
+      const latestBlockNumber = await ethereum.request({
+        method: 'eth_blockNumber',
+      });
+
+      for (let i = latestBlockNumber; i > latestBlockNumber - 10; i--) {
+        const block = await ethereum.request({
+          method: 'eth_getBlockByNumber',
+          params: ['0x' + Number(i).toString(16), true],
+        });
+
+        console.log(parseInt(block.number));
+
+        blockList.push({
+          number: block.number,
+          hash: block.hash,
+        });
+      }
+
+      console.log(blockList);
+    }
+  }
+
+  historyDisplay.innerHTML = '';
+
+  for (let block of blockList) {
+    createBlockList(block);
+  }
+
+  currentBlock.innerText = `Latest ${blockList.length} Blocks`;
+}
+
+function createBlockList(block) {
+  historyDisplay.innerHTML += `
+    <div class="block-container">
+      <span>
+      <i class="fa-solid fa-cube"></i> ${parseInt(block.number)}
+      </span>
+
+      <span>
+        <i class="fa-solid fa-hashtag"></i> ${block.hash}
       </span>
     </div>
     `;
 }
 
 function clearBlockExplorer() {
+  while (blockList.length > 0) {
+    blockList.pop();
+  }
+
+  searchBarInput.value = '';
+
   currentBlock.innerText = 'XXXXXXX';
 
   historyDisplay.innerHTML = `
@@ -130,5 +216,6 @@ function clearBlockExplorer() {
 document.addEventListener('DOMContentLoaded', initApp);
 checkBalanceButton.addEventListener('click', checkWallet);
 sendTransactionButton.addEventListener('click', sendFunds);
-checkBlockButton.addEventListener('click', blockExplorer);
+searchButton.addEventListener('click', searchBlock);
+checkBlockButton.addEventListener('click', getBlocks);
 clearBlockButton.addEventListener('click', clearBlockExplorer);

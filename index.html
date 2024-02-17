@@ -32,6 +32,12 @@
       defer
     ></script>
 
+    <!-- <script
+      type="module"
+      src="./scripts/lib/test.js"
+      defer
+    ></script> -->
+
     <title>Etheria | Block Explorer</title>
   </head>
 
@@ -52,7 +58,9 @@
       <div class="wrapper">
         <div class="wallet">
           <div class="input">
-            <label for="sender-address">Sender</label>
+            <label for="sender-address"
+              ><i class="fa-solid fa-right-from-bracket"></i> Sender</label
+            >
 
             <input
               type="text"
@@ -72,9 +80,9 @@
 
         <div class="transaction">
           <div class="input">
-            <label for="amount"
-              ><i class="fa-brands fa-ethereum"></i> Ether</label
-            >
+            <label for="amount">
+              <i class="fa-solid fa-receipt"></i> Amount
+            </label>
 
             <input
               type="number"
@@ -84,7 +92,9 @@
           </div>
 
           <div class="input">
-            <label for="receiver-address">Receiver</label>
+            <label for="receiver-address"
+              ><i class="fa-solid fa-right-to-bracket"></i> Receiver</label
+            >
 
             <input
               type="text"
@@ -102,18 +112,28 @@
         </div>
 
         <div class="block-explorer">
-          <div class="be-header">
+          <div class="block-explorer-header">
+            <input
+              type="number"
+              id="search-bar"
+              placeholder="Search..."
+            />
+
             <div class="button-container">
-              <button id="check-block">Block</button>
+              <button id="search">
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </button>
+
+              <button id="check-block">Get</button>
 
               <button id="clear-block">Clear</button>
             </div>
+          </div>
 
-            <div class="block-number-container">
-              <i class="fa-solid fa-cube"></i>
+          <div class="block-number-container">
+            <i class="fa-solid fa-cube"></i>
 
-              <span id="block-number">XXXXXXX</span>
-            </div>
+            <span id="block-number">XXXXXXX</span>
           </div>
 
           <div id="display-history">
