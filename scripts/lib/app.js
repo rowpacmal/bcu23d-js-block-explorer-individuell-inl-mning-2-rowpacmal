@@ -74,26 +74,31 @@ async function sendFunds() {
 }
 
 async function searchBlock() {
-  const block = await ethereum.request({
-    method: 'eth_getBlockByNumber',
-    params: ['0x' + Number(searchBarInput.value).toString(16), true],
-  });
+  currentBlock.innerText = 'Loading...';
 
-  const blockNumber = parseInt(block.number);
-  const transactions = block.transactions;
+  if (typeof ethereum !== 'undefined') {
+    const block = await ethereum.request({
+      method: 'eth_getBlockByNumber',
+      params: ['0x' + Number(searchBarInput.value).toString(16), true],
+    });
 
-  if (block !== null && transactions !== null) {
-    currentBlock.innerText = blockNumber;
-    if (transactions.length) {
-      displayHistory(transactions);
-    } else {
-      historyDisplay.innerHTML = `
+    const blockNumber = parseInt(block.number);
+    const transactions = block.transactions;
+
+    if (block !== null && transactions !== null) {
+      currentBlock.innerText = blockNumber;
+
+      if (transactions.length) {
+        displayHistory(transactions);
+      } else {
+        historyDisplay.innerHTML = `
         <div class="block-container">
           <span>
             No history has been recorded yet...
           </span>
         </div>
         `;
+      }
     }
   }
 }
@@ -128,28 +133,14 @@ function createTransactionList(transaction) {
 }
 
 async function getBlocks() {
-  currentBlock.innerText = 'Loading...';
+  if (currentBlock.innerText !== 'Loading...') {
+    currentBlock.innerText = 'Loading...';
 
-  if (typeof ethereum !== 'undefined') {
-    if (blockList.length > 0) {
-      const lastEntry = blockList.at(-1).number;
+    while (blockList.length > 0) {
+      blockList.pop();
+    }
 
-      for (let i = lastEntry - 1; i > lastEntry - 11; i--) {
-        const block = await ethereum.request({
-          method: 'eth_getBlockByNumber',
-          params: ['0x' + Number(i).toString(16), true],
-        });
-
-        console.log(parseInt(block.number));
-
-        blockList.push({
-          number: block.number,
-          hash: block.hash,
-        });
-      }
-
-      console.log(blockList);
-    } else {
+    if (typeof ethereum !== 'undefined') {
       const latestBlockNumber = await ethereum.request({
         method: 'eth_blockNumber',
       });
@@ -160,25 +151,21 @@ async function getBlocks() {
           params: ['0x' + Number(i).toString(16), true],
         });
 
-        console.log(parseInt(block.number));
-
         blockList.push({
           number: block.number,
           hash: block.hash,
         });
       }
-
-      console.log(blockList);
     }
+
+    historyDisplay.innerHTML = '';
+
+    for (let block of blockList) {
+      createBlockList(block);
+    }
+
+    currentBlock.innerText = `Latest ${blockList.length} Blocks`;
   }
-
-  historyDisplay.innerHTML = '';
-
-  for (let block of blockList) {
-    createBlockList(block);
-  }
-
-  currentBlock.innerText = `Latest ${blockList.length} Blocks`;
 }
 
 function createBlockList(block) {
@@ -196,13 +183,9 @@ function createBlockList(block) {
 }
 
 function clearBlockExplorer() {
-  while (blockList.length > 0) {
-    blockList.pop();
-  }
-
   searchBarInput.value = '';
 
-  currentBlock.innerText = 'XXXXXXX';
+  currentBlock.innerText = '---';
 
   historyDisplay.innerHTML = `
     <div class="block-container">
