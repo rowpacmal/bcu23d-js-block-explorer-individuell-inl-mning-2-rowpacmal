@@ -98,6 +98,29 @@ button:active {
 /* ================= */
 /* custom styles === */
 /* ================= */
+#warning {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  transition: all 3s ease-in-out;
+  opacity: 0;
+  user-select: none;
+
+  p {
+    background-color: var(--color5);
+    margin: 1rem;
+    max-width: 600px;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    text-align: center;
+    box-shadow: 0 0 0.75rem var(--color0);
+  }
+}
+
 .hero {
   display: flex;
   flex-direction: column;
