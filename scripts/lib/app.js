@@ -1,3 +1,10 @@
+import { buildApp } from '../components/build-app.js';
+
+const rootElement = document.querySelector('#root');
+const blockList = [];
+
+buildApp(rootElement);
+
 const checkBalanceButton = document.querySelector('#check-balance');
 const balanceDisplay = document.querySelector('#balance');
 const historyDisplay = document.querySelector('#display-history');
@@ -10,7 +17,6 @@ const searchButton = document.querySelector('#search');
 const currentBlock = document.querySelector('#block-number');
 const checkBlockButton = document.querySelector('#check-block');
 const clearBlockButton = document.querySelector('#clear-block');
-const blockList = [];
 
 async function initApp() {
   if (typeof ethereum !== 'undefined') {
