@@ -1,7 +1,7 @@
 import { buildApp } from '../components/build-app.js';
 import { buildNoWallet } from '../components/build-nowallet.js';
 import { buildWelcome } from '../components/build-welcome.js';
-import { appFunc } from './func.js';
+import { appControl } from './control.js';
 import { appNoWallet } from './nowallet.js';
 import { appWelcome } from './welcome.js';
 
@@ -14,7 +14,7 @@ async function initApp() {
 
     if (accounts.length > 0) {
       buildApp(rootElement);
-      appFunc();
+      appControl();
     } else {
       buildWelcome(rootElement);
       appWelcome();
