@@ -1,6 +1,7 @@
 import { buildApp } from '../components/build-app.js';
 import { buildNoWallet } from '../components/build-nowallet.js';
 import { buildWelcome } from '../components/build-welcome.js';
+import { notOnSepoliaTestnet } from '../components/build-notifications.js';
 import { appControl } from './control.js';
 import { appNoWallet } from './nowallet.js';
 import { appWelcome } from './welcome.js';
@@ -23,26 +24,12 @@ async function initApp() {
     const chainId = await window.ethereum.request({ method: 'eth_chainId' });
 
     if (chainId !== '0xaa36a7') {
-      notOnSepoliaTestnet();
+      notOnSepoliaTestnet(warningElement);
     }
   } else {
     buildNoWallet(rootElement);
     appNoWallet();
   }
-}
-
-function notOnSepoliaTestnet() {
-  warningElement.innerHTML =
-    '<p>You are currently connected to a different blockchain than "Sepolia Testnet." To ensure the safety of your funds, it is strongly recommended to switch to the "Sepolia Testnet" before using this application.</p>';
-  warningElement.style.opacity = 1;
-
-  setTimeout(() => {
-    warningElement.style.opacity = 0;
-
-    setTimeout(() => {
-      warningElement.innerHTML = '';
-    }, 3000);
-  }, 30000);
 }
 
 function reloadApp() {

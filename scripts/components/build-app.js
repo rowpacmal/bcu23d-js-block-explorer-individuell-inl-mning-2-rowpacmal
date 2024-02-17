@@ -1,5 +1,10 @@
 import { buildHeader } from './build-header.js';
 import { buildFooter } from './build-footer.js';
+import {
+  defaultBalance,
+  defaultMessage,
+  defaultPlaceholder,
+} from './build-misc.js';
 
 export function buildApp(parent) {
   const container = document.createElement('main');
@@ -23,7 +28,9 @@ export function buildApp(parent) {
       <div class="balance-container">
         <i class="fa-brands fa-ethereum"></i>
 
-        <span id="balance">0.00</span> ETH
+        <span id="balance">
+          ${defaultBalance()}
+        </span> ETH
       </div>
 
       <button id="check-balance">
@@ -93,16 +100,12 @@ export function buildApp(parent) {
         <i class="fa-solid fa-cube"></i>
 
         <span id="block-number">
-          ---
+          ${defaultPlaceholder()}
         </span>
       </div>
 
       <div id="display-history">
-        <div class="block-container">
-          <span>
-            No history has been recorded yet...
-          </span>
-        </div>
+        ${defaultMessage()}
       </div>
     </div>
   </div>
