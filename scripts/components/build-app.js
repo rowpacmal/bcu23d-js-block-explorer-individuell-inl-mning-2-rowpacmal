@@ -1,25 +1,10 @@
+import { buildHeader } from './build-header.js';
+import { buildFooter } from './build-footer.js';
+
 export function buildApp(parent) {
   const container = document.createElement('main');
-
-  container.innerHTML = `
-  <header class="hero">
-    <img
-      src="./assets/images/ethereum-logo.webp"
-      alt=""
-      width="429"
-      height="699"
-      loading="lazy"
-    />
-
-    <h1>
-      Etheria
-    </h1>
-
-    <p>
-      Block Explorer
-    </p>
-  </header>
-
+  container.appendChild(buildHeader());
+  container.innerHTML += `
   <div class="wrapper">
     <div class="wallet">
       <div class="input">
@@ -121,13 +106,8 @@ export function buildApp(parent) {
       </div>
     </div>
   </div>
-
-  <footer class="copyright">
-    <p>
-      Etheria &copy; 2024
-    </p>
-  </footer>
   `;
+  container.appendChild(buildFooter());
 
   parent.appendChild(container);
 }

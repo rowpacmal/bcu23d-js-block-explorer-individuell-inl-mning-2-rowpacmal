@@ -79,6 +79,10 @@ button {
   background: linear-gradient(180deg, var(--color1), var(--color0));
 }
 
+.wide-btn {
+  width: auto;
+}
+
 button:hover {
   color: var(--color5);
   background: linear-gradient(180deg, var(--color3), var(--color2));
@@ -136,6 +140,20 @@ button:active {
   background: linear-gradient(180deg, var(--color5), var(--color4));
   box-shadow: 0 0 0.75rem var(--color0);
   padding-bottom: 1rem;
+}
+
+.welcome-message {
+  text-align: center;
+  padding: 1rem;
+
+  h2 {
+    font-size: 2rem;
+    margin-top: 1rem;
+  }
+
+  p {
+    margin: 1rem 0 2rem;
+  }
 }
 
 .wallet,

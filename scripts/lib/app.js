@@ -1,10 +1,11 @@
 import { buildApp } from '../components/build-app.js';
+import { buildWelcome } from '../components/build-welcome.js';
+import { appFunc } from './func.js';
+import { appWelcome } from './welcome.js';
 
 const rootElement = document.querySelector('#root');
-const blockList = [];
 
-buildApp(rootElement);
-
+/* const connectWalletButton = document.querySelector('#connect-wallet');
 const checkBalanceButton = document.querySelector('#check-balance');
 const balanceDisplay = document.querySelector('#balance');
 const historyDisplay = document.querySelector('#display-history');
@@ -16,20 +17,31 @@ const searchBarInput = document.querySelector('#search-bar');
 const searchButton = document.querySelector('#search');
 const currentBlock = document.querySelector('#block-number');
 const checkBlockButton = document.querySelector('#check-block');
-const clearBlockButton = document.querySelector('#clear-block');
+const clearBlockButton = document.querySelector('#clear-block'); */
 
 async function initApp() {
   if (typeof ethereum !== 'undefined') {
     console.info('MetaMask is installed!');
+    const accounts = await ethereum.request({ method: 'eth_accounts' });
+
+    if (accounts.length > 0) {
+      buildApp(rootElement);
+      appFunc();
+    } else {
+      buildWelcome(rootElement);
+      appWelcome();
+    }
   } else {
     console.warn('MetaMask is not installed!');
   }
 }
 
+/* async function connectWallet() {
+  await ethereum.request({ method: 'eth_requestAccounts' });
+}
+
 async function checkWallet() {
   if (typeof ethereum !== 'undefined') {
-    await ethereum.request({ method: 'eth_requestAccounts' });
-
     if (senderAddressInput.value) {
       const balance = await ethereum.request({
         method: 'eth_getBalance',
@@ -47,8 +59,6 @@ async function checkWallet() {
 
 async function sendFunds() {
   if (typeof ethereum !== 'undefined') {
-    await ethereum.request({ method: 'eth_requestAccounts' });
-
     if (
       senderAddressInput.value &&
       transactionAmountInput.value &&
@@ -202,9 +212,12 @@ function clearBlockExplorer() {
     `;
 }
 
-document.addEventListener('DOMContentLoaded', initApp);
+
+connectWalletButton.addEventListener('click', connectWallet);
 checkBalanceButton.addEventListener('click', checkWallet);
 sendTransactionButton.addEventListener('click', sendFunds);
 searchButton.addEventListener('click', searchBlock);
 checkBlockButton.addEventListener('click', getBlocks);
 clearBlockButton.addEventListener('click', clearBlockExplorer);
+ */
+document.addEventListener('DOMContentLoaded', initApp);
