@@ -24,9 +24,9 @@ async function initApp() {
   }
 }
 
-async function reloadMetaMask() {
+function reloadApp() {
   location.reload();
 }
 
 document.addEventListener('DOMContentLoaded', initApp);
-ethereum.on('accountsChanged', reloadMetaMask);
+ethereum.on('accountsChanged', reloadApp);
