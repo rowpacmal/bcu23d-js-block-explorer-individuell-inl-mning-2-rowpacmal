@@ -3,6 +3,7 @@ import { sendFunds } from './func/send-funds.js';
 import { searchBlock } from './func/search-block.js';
 import { getBlocks } from './func/get-blocks.js';
 import { clearBlockExplorer } from './func/clear-explorer.js';
+import toggleLedger from './func/toggle-ledger.js';
 
 export function appControl() {
   const checkBalanceButton = document.querySelector('#check-balance');
@@ -17,10 +18,16 @@ export function appControl() {
   const currentBlock = document.querySelector('#block-number');
   const checkBlockButton = document.querySelector('#check-block');
   const clearBlockButton = document.querySelector('#clear-block');
+  const toggleLedgerButton = document.querySelector('#toggle-ledger');
+  const ledgerTotal = document.querySelector('#ledger-total');
+  const ledgerDisplay = document.querySelector('#display-ledger');
+  const ledgerDisplayContainer = document.querySelector(
+    '#display-ledger-container'
+  );
   const blockList = [];
 
   checkBalanceButton.addEventListener('click', () => {
-    checkWallet(senderAddressInput, balanceDisplay);
+    checkWallet(senderAddressInput, balanceDisplay, ledgerDisplay, ledgerTotal);
   });
   sendTransactionButton.addEventListener('click', () => {
     sendFunds(senderAddressInput, transactionAmountInput, receiverAddressInput);
@@ -33,5 +40,8 @@ export function appControl() {
   });
   clearBlockButton.addEventListener('click', () => {
     clearBlockExplorer(searchBarInput, currentBlock, historyDisplay);
+  });
+  toggleLedgerButton.addEventListener('click', () => {
+    toggleLedger(toggleLedgerButton, ledgerDisplayContainer);
   });
 }

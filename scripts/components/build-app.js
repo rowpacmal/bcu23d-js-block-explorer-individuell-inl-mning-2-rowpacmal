@@ -11,31 +11,56 @@ export function buildApp(parent) {
   container.appendChild(buildHeader());
   container.innerHTML += `
   <div class="wrapper">
-    <div class="wallet">
-      <div class="input">
-        <label for="sender-address">
-        <i class="fa-solid fa-right-from-bracket"></i>
-        Sender
-        </label>
+    <div class="wrapper-header">
+      <div class="wallet">
+        <div class="input">
+          <label for="sender-address">
+          <i class="fa-solid fa-right-from-bracket"></i>
+          Sender
+          </label>
 
-        <input
-          type="text"
-          id="sender-address"
-          placeholder="Wallet address..."
-        />
+          <input
+            type="text"
+            id="sender-address"
+            placeholder="Wallet address..."
+          />
+        </div>
+
+        <div class="balance-container">
+          <i class="fa-brands fa-ethereum"></i>
+
+          <span id="balance">
+            ${defaultBalance()}
+          </span> ETH
+        </div>
+
+        <button id="check-balance">
+          Check
+        </button>
       </div>
 
-      <div class="balance-container">
-        <i class="fa-brands fa-ethereum"></i>
+      <div class="address-history">
+        <div class="address-history-container">
+          <h2>
+            <i class="fa-solid fa-clock-rotate-left"></i>
+            History
+            <span id="ledger-total">
+              (---)
+            </span>
+          </h2>
 
-        <span id="balance">
-          ${defaultBalance()}
-        </span> ETH
+          <button id="toggle-ledger">
+            Show
+            <i class="fa-solid fa-caret-down"></i>
+          </button>
+        </div>
+      
+        <div id="display-ledger-container" style="display:none;">
+          <div id="display-ledger">
+            ${defaultMessage()}
+          </div>
+        </div>
       </div>
-
-      <button id="check-balance">
-        Check
-      </button>
     </div>
 
     <div class="transaction">

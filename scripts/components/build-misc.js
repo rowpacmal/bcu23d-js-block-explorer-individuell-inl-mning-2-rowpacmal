@@ -1,16 +1,16 @@
-export function defaultBalance() {
+export const defaultBalance = () => {
   return '0.00';
-}
+};
 
-export function defaultPlaceholder() {
+export const defaultPlaceholder = () => {
   return '---';
-}
+};
 
-export function defaultLoading() {
+export const defaultLoading = () => {
   return 'Loading...';
-}
+};
 
-export function defaultMessage() {
+export const defaultMessage = () => {
   return `
   <div class="block-container">
     <span>
@@ -18,8 +18,13 @@ export function defaultMessage() {
     </span>
   </div>
   `;
-}
+};
 
-export function defaultLatestBlocks(list) {
+export const defaultLatestBlocks = (list) => {
   return `Latest ${list.length} Blocks`;
-}
+};
+
+export const DefaultToggleLedger = {
+  show: 'Show <i class="fa-solid fa-caret-down"></i>',
+  hide: 'Hide <i class="fa-solid fa-caret-up"></i>',
+};
