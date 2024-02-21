@@ -19,37 +19,55 @@ export async function checkWallet(
 
       balanceDisplay.innerText = parseBalance.toFixed(4);
 
-      historyDisplay.innerHTML = defaultMessage();
-      historyCount.innerText = '(Loading...)';
+      const chainId = await window.ethereum.request({ method: 'eth_chainId' });
+      let apiEndpoint = null;
 
-      const apiEndpoint = `https://api-sepolia.etherscan.io/api?module=account&action=txlist&address=${walletAddress.value}&apikey=${apiKey}`;
+      switch (chainId) {
+        case '0x1':
+          apiEndpoint = `https://api.etherscan.io/api?module=account&action=txlist&address=${walletAddress.value}&apikey=${apiKey}`;
+          break;
+        case '0xaa36a7':
+          apiEndpoint = `https://api-sepolia.etherscan.io/api?module=account&action=txlist&address=${walletAddress.value}&apikey=${apiKey}`;
+          break;
+        default:
+          console.warn(
+            `The application is not configured for the selected network. Transaction history may not be recorded as expected. Verify your wallet settings for the correct supported network (mainnet, testnet, etc.). If issues persist, consult the application's documentation or contact support for assistance.`
+          );
+          break;
+      }
 
-      try {
-        const response = await fetch(apiEndpoint);
-        const data = await response.json();
+      if (apiEndpoint !== null) {
+        historyDisplay.innerHTML = defaultMessage();
+        historyCount.innerText = '(Loading...)';
 
-        const transactions = data.result;
+        try {
+          const response = await fetch(apiEndpoint);
+          const data = await response.json();
+          const transactions = data.result.sort(
+            (a, b) => b.timeStamp - a.timeStamp
+          );
 
-        if (transactions.length) {
-          historyDisplay.innerHTML = '';
+          if (transactions.length) {
+            historyDisplay.innerHTML = '';
 
-          const count = 5;
+            const count = 5;
 
-          for (let i = 0; i < count; i++) {
-            createTransactionList(
-              transactions[i],
-              historyDisplay,
-              walletAddress.value
-            );
+            for (let i = 0; i < count; i++) {
+              createTransactionList(
+                transactions[i],
+                historyDisplay,
+                walletAddress.value
+              );
+            }
+
+            historyCount.innerText = `(Top ${count})`;
+          } else {
+            historyDisplay.innerHTML = defaultMessage();
+            historyCount.innerText = '(---)';
           }
-
-          historyCount.innerText = `(${count} most recent transactions)`;
-        } else {
-          historyDisplay.innerHTML = defaultMessage();
-          historyCount.innerText = '(---)';
+        } catch (error) {
+          throw error;
         }
-      } catch (error) {
-        throw error;
       }
     } else {
       balanceDisplay.innerText = defaultBalance();
