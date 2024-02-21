@@ -1,4 +1,4 @@
-export function createTransactionList(transaction, history, address) {
+const buildTransactionList = (transaction, history, address) => {
   const parseValue = parseInt(transaction.value) / Math.pow(10, 18);
   let from = transaction.from;
   let to = transaction.to;
@@ -28,18 +28,6 @@ export function createTransactionList(transaction, history, address) {
     </span>
   </div>
   `;
-}
+};
 
-export function createBlockList(block, history) {
-  history.innerHTML += `
-  <div class="block-container">
-    <span>
-    <i class="fa-solid fa-cube"></i> ${parseInt(block.number)}
-    </span>
-
-    <span>
-      <i class="fa-solid fa-hashtag"></i> ${block.hash}
-    </span>
-  </div>
-  `;
-}
+export default buildTransactionList;

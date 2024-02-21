@@ -1,6 +1,6 @@
 import { DefaultToggleLedger } from '../../components/build-misc.js';
 
-const toggleLedger = (button, ledger) => {
+const toggleWalletHistory = (button, ledger) => {
   if (ledger.style.display === 'none') {
     button.innerHTML = DefaultToggleLedger.hide;
 
@@ -12,4 +12,4 @@ const toggleLedger = (button, ledger) => {
   }
 };
 
-export default toggleLedger;
+export default toggleWalletHistory;

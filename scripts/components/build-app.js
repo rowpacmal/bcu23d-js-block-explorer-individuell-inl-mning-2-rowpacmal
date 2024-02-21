@@ -49,7 +49,7 @@ export function buildApp(parent) {
             </span>
           </h2>
 
-          <button id="toggle-ledger">
+          <button id="toggle-wallet-history">
             Show
             <i class="fa-solid fa-caret-down"></i>
           </button>
@@ -121,15 +121,15 @@ export function buildApp(parent) {
         </div>
       </div>
 
-      <div class="block-number-container">
+      <div class="current-block-container">
         <i class="fa-solid fa-cube"></i>
 
-        <span id="block-number">
+        <span id="current-block">
           ${defaultPlaceholder()}
         </span>
       </div>
 
-      <div id="display-history">
+      <div id="display-block">
         ${defaultMessage()}
       </div>
     </div>

@@ -6,28 +6,28 @@ import { appControl } from './control.js';
 import { appNoWallet } from './nowallet.js';
 import { appWelcome } from './welcome.js';
 
-const rootElement = document.querySelector('#root');
-const warningElement = document.querySelector('#warning');
+const rootContainer = document.querySelector('#root');
+const notificationsContainer = document.querySelector('#notifications');
 
 async function initApp() {
   if (typeof ethereum !== 'undefined') {
     const accounts = await ethereum.request({ method: 'eth_accounts' });
 
     if (accounts.length > 0) {
-      buildApp(rootElement);
+      buildApp(rootContainer);
       appControl();
     } else {
-      buildWelcome(rootElement);
+      buildWelcome(rootContainer);
       appWelcome();
     }
 
     const chainId = await window.ethereum.request({ method: 'eth_chainId' });
 
     if (chainId !== '0xaa36a7') {
-      notOnSepoliaTestnet(warningElement);
+      notOnSepoliaTestnet(notificationsContainer);
     }
   } else {
-    buildNoWallet(rootElement);
+    buildNoWallet(rootContainer);
     appNoWallet();
   }
 }
