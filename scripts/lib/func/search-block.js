@@ -1,11 +1,11 @@
 import buildTransactionList from '../../components/build-transaction-list.js';
 import { defaultLoading, defaultMessage } from '../../components/build-misc.js';
 
-export async function searchBlock(
+const searchBlock = async (
   searchBarInput,
   currentBlockDisplay,
   blockHistoryDisplay
-) {
+) => {
   currentBlockDisplay.innerText = defaultLoading();
 
   const block = await ethereum.request({
@@ -31,4 +31,6 @@ export async function searchBlock(
   } else {
     return null;
   }
-}
+};
+
+export default searchBlock;

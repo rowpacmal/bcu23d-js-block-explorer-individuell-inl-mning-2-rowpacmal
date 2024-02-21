@@ -1,8 +1,8 @@
-export async function sendFunds(
+const sendFunds = async (
   senderWalletAddress,
   transactionAmount,
   receiverWalletAddress
-) {
+) => {
   if (typeof ethereum !== 'undefined') {
     if (
       senderWalletAddress.value &&
@@ -33,4 +33,6 @@ export async function sendFunds(
       return null;
     }
   }
-}
+};
+
+export default sendFunds;

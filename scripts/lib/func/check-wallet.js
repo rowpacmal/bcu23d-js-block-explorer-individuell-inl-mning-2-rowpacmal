@@ -1,5 +1,5 @@
-import { defaultBalance, defaultMessage } from '../../components/build-misc.js';
 import getWalletHistory from './get-wallet-history.js';
+import BuildDefaultComponents from '../../components/misc/build-default.js';
 
 const checkWallet = async (
   walletAddress,
@@ -20,9 +20,9 @@ const checkWallet = async (
 
       await getWalletHistory(walletAddress, historyDisplay, historyCount);
     } else {
-      balanceDisplay.innerText = defaultBalance();
-      historyDisplay.innerHTML = defaultMessage();
-      historyCount.innerText = '(---)';
+      balanceDisplay.innerText = BuildDefaultComponents.balance;
+      historyDisplay.innerHTML = BuildDefaultComponents.noHistory;
+      historyCount.innerText = BuildDefaultComponents.placeholder;
 
       return null;
     }

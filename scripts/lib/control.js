@@ -1,9 +1,9 @@
 import checkWallet from './func/check-wallet.js';
-import { sendFunds } from './func/send-funds.js';
-import { searchBlock } from './func/search-block.js';
-import { getBlocks } from './func/get-block-history.js';
-import { clearBlockExplorer } from './func/clear-explorer.js';
 import toggleWalletHistory from './func/toggle-wallet-history.js';
+import sendFunds from './func/send-funds.js';
+import searchBlock from './func/search-block.js';
+import getBlockHistory from './func/get-block-history.js';
+import clearBlockExplorer from './func/clear-block-explorer.js';
 
 export function appControl() {
   const senderAddressInput = document.querySelector('#sender-address');
@@ -39,26 +39,31 @@ export function appControl() {
       walletHistoryCount
     );
   });
+
+  toggleWalletHistoryButton.addEventListener('click', () => {
+    toggleWalletHistory(
+      toggleWalletHistoryButton,
+      walletHistoryDisplayContainer
+    );
+  });
+
   sendTransactionButton.addEventListener('click', () => {
     sendFunds(senderAddressInput, transactionAmountInput, receiverAddressInput);
   });
+
   searchButton.addEventListener('click', () => {
     searchBlock(searchBarInput, currentBlockDisplay, blockHistoryDisplay);
   });
+
   checkBlockButton.addEventListener('click', () => {
-    getBlocks(blockList, currentBlockDisplay, blockHistoryDisplay);
+    getBlockHistory(blockList, currentBlockDisplay, blockHistoryDisplay);
   });
+
   clearBlockButton.addEventListener('click', () => {
     clearBlockExplorer(
       searchBarInput,
       currentBlockDisplay,
       blockHistoryDisplay
-    );
-  });
-  toggleWalletHistoryButton.addEventListener('click', () => {
-    toggleWalletHistory(
-      toggleWalletHistoryButton,
-      walletHistoryDisplayContainer
     );
   });
 }

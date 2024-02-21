@@ -1,5 +1,5 @@
 import buildTransactionList from '../../components/build-transaction-list.js';
-import { defaultMessage } from '../../components/build-misc.js';
+import BuildDefaultComponents from '../../components/misc/build-default.js';
 import apiKey from '../../utils/config.js';
 
 const getWalletHistory = async (
@@ -25,8 +25,8 @@ const getWalletHistory = async (
   }
 
   if (apiEndpoint !== null) {
-    historyDisplay.innerHTML = defaultMessage();
-    historyCount.innerText = '(Loading...)';
+    historyDisplay.innerHTML = BuildDefaultComponents.noHistory;
+    historyCount.innerText = BuildDefaultComponents.loading;
 
     try {
       const response = await fetch(apiEndpoint);
@@ -48,10 +48,10 @@ const getWalletHistory = async (
           );
         }
 
-        historyCount.innerText = `(Top ${count})`;
+        historyCount.innerText = `Top ${count}`;
       } else {
-        historyDisplay.innerHTML = defaultMessage();
-        historyCount.innerText = '(---)';
+        historyDisplay.innerHTML = BuildDefaultComponents.noHistory;
+        historyCount.innerText = BuildDefaultComponents.placeholder;
       }
 
       return data;

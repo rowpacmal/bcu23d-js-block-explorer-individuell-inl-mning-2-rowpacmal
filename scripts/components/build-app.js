@@ -1,10 +1,6 @@
 import { buildHeader } from './build-header.js';
 import { buildFooter } from './build-footer.js';
-import {
-  defaultBalance,
-  defaultMessage,
-  defaultPlaceholder,
-} from './build-misc.js';
+import BuildDefaultComponents from './misc/build-default.js';
 
 export function buildApp(parent) {
   const container = document.createElement('main');
@@ -30,7 +26,7 @@ export function buildApp(parent) {
           <i class="fa-brands fa-ethereum"></i>
 
           <span id="balance">
-            ${defaultBalance()}
+            ${BuildDefaultComponents.balance}
           </span> ETH
         </div>
 
@@ -43,10 +39,11 @@ export function buildApp(parent) {
         <div class="address-history-container">
           <h2>
             <i class="fa-solid fa-clock-rotate-left"></i>
-            History
+            History (
             <span id="ledger-total">
-              (---)
+              ${BuildDefaultComponents.placeholder}
             </span>
+            )
           </h2>
 
           <button id="toggle-wallet-history">
@@ -57,7 +54,7 @@ export function buildApp(parent) {
       
         <div id="display-ledger-container" style="display:none;">
           <div id="display-ledger">
-            ${defaultMessage()}
+            ${BuildDefaultComponents.noHistory}
           </div>
         </div>
       </div>
@@ -125,12 +122,12 @@ export function buildApp(parent) {
         <i class="fa-solid fa-cube"></i>
 
         <span id="current-block">
-          ${defaultPlaceholder()}
+          ${BuildDefaultComponents.placeholder}
         </span>
       </div>
 
       <div id="display-block">
-        ${defaultMessage()}
+        ${BuildDefaultComponents.noHistory}
       </div>
     </div>
   </div>

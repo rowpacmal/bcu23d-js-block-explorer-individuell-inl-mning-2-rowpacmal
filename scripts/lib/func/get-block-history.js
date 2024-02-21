@@ -1,16 +1,13 @@
 import buildBlockList from '../../components/build-block-list.js';
-import {
-  defaultLatestBlocks,
-  defaultLoading,
-} from '../../components/build-misc.js';
+import BuildDefaultComponents from '../../components/misc/build-default.js';
 
-export async function getBlocks(
+const getBlockHistory = async (
   blockList,
   currentBlockDisplay,
   blockHistoryDisplay
-) {
-  if (currentBlockDisplay.innerText !== defaultLoading()) {
-    currentBlockDisplay.innerText = defaultLoading();
+) => {
+  if (currentBlockDisplay.innerText !== BuildDefaultComponents.loading) {
+    currentBlockDisplay.innerText = BuildDefaultComponents.loading;
 
     while (blockList.length > 0) {
       blockList.pop();
@@ -40,8 +37,11 @@ export async function getBlocks(
       buildBlockList(block, blockHistoryDisplay);
     }
 
-    currentBlockDisplay.innerText = defaultLatestBlocks(blockList);
+    currentBlockDisplay.innerText =
+      BuildDefaultComponents.latestBlocks(blockList);
   } else {
     return null;
   }
-}
+};
+
+export default getBlockHistory;
