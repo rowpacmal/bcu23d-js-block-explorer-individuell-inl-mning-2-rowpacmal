@@ -1,7 +1,7 @@
-import { buildHeader } from './build-header.js';
-import { buildFooter } from './build-footer.js';
+import buildHeader from './build-header.js';
+import buildFooter from './build-footer.js';
 
-export function buildNoWallet(parent) {
+const buildNoWallet = (parent) => {
   const container = document.createElement('main');
   container.appendChild(buildHeader());
   container.innerHTML += `
@@ -24,4 +24,6 @@ export function buildNoWallet(parent) {
   container.appendChild(buildFooter());
 
   parent.appendChild(container);
-}
+};
+
+export default buildNoWallet;

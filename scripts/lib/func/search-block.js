@@ -1,12 +1,14 @@
 import buildTransactionList from '../../components/build-transaction-list.js';
-import { defaultLoading, defaultMessage } from '../../components/build-misc.js';
+import BuildDefaultComponents from '../../components/misc/build-default.js';
+import clearDisplay from './clear-display.js';
 
 const searchBlock = async (
   searchBarInput,
   currentBlockDisplay,
   blockHistoryDisplay
 ) => {
-  currentBlockDisplay.innerText = defaultLoading();
+  blockHistoryDisplay.innerHTML = BuildDefaultComponents.noHistory;
+  currentBlockDisplay.innerText = BuildDefaultComponents.loading;
 
   const block = await ethereum.request({
     method: 'eth_getBlockByNumber',
@@ -20,13 +22,13 @@ const searchBlock = async (
     currentBlockDisplay.innerText = blockNumber;
 
     if (transactions.length) {
-      blockHistoryDisplay.innerHTML = '';
+      clearDisplay(blockHistoryDisplay);
 
       for (let transaction of transactions) {
         buildTransactionList(transaction, blockHistoryDisplay);
       }
     } else {
-      blockHistoryDisplay.innerHTML = defaultMessage();
+      blockHistoryDisplay.innerHTML = BuildDefaultComponents.noHistory;
     }
   } else {
     return null;

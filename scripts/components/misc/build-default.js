@@ -13,6 +13,10 @@ const BuildDefaultComponents = {
     </div>
   `,
 
+  topHistory: (count) => {
+    return `Top ${count}`;
+  },
+
   latestBlocks: (blockList) => {
     return `Latest ${blockList.length} Blocks`;
   },

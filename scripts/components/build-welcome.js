@@ -1,7 +1,7 @@
-import { buildHeader } from './build-header.js';
-import { buildFooter } from './build-footer.js';
+import buildHeader from './build-header.js';
+import buildFooter from './build-footer.js';
 
-export function buildWelcome(parent) {
+const buildWelcome = (parent) => {
   const container = document.createElement('main');
   container.appendChild(buildHeader());
   container.innerHTML += `
@@ -24,4 +24,6 @@ export function buildWelcome(parent) {
   container.appendChild(buildFooter());
 
   parent.appendChild(container);
-}
+};
+
+export default buildWelcome;

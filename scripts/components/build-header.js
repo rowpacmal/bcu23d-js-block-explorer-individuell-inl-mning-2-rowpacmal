@@ -1,4 +1,4 @@
-export function buildHeader() {
+const buildHeader = () => {
   const container = document.createElement('header');
   container.classList.add('hero');
   container.innerHTML = `
@@ -20,4 +20,6 @@ export function buildHeader() {
   `;
 
   return container;
-}
+};
+
+export default buildHeader;

@@ -1,10 +1,10 @@
-import { buildApp } from '../components/build-app.js';
-import { buildNoWallet } from '../components/build-nowallet.js';
-import { buildWelcome } from '../components/build-welcome.js';
-import { notOnSepoliaTestnet } from '../components/build-notifications.js';
-import { appControl } from './control.js';
-import { appNoWallet } from './nowallet.js';
-import { appWelcome } from './welcome.js';
+import buildApp from '../components/build-app.js';
+import buildNoWallet from '../components/build-nowallet.js';
+import buildWelcome from '../components/build-welcome.js';
+import appControl from './control.js';
+import appNoWallet from './no-wallet.js';
+import appWelcome from './welcome.js';
+import Notifications from '../components/build-notifications.js';
 
 const rootContainer = document.querySelector('#root');
 const notificationsContainer = document.querySelector('#notifications');
@@ -15,16 +15,16 @@ async function initApp() {
 
     if (accounts.length > 0) {
       buildApp(rootContainer);
-      appControl();
+      appControl(notificationsContainer);
     } else {
       buildWelcome(rootContainer);
       appWelcome();
     }
 
-    const chainId = await window.ethereum.request({ method: 'eth_chainId' });
+    const chainId = await ethereum.request({ method: 'eth_chainId' });
 
     if (chainId !== '0xaa36a7') {
-      notOnSepoliaTestnet(notificationsContainer);
+      Notifications.notOnSepoliaTestnet(notificationsContainer);
     }
   } else {
     buildNoWallet(rootContainer);
@@ -37,5 +37,6 @@ function reloadApp() {
 }
 
 document.addEventListener('DOMContentLoaded', initApp);
+
 ethereum.on('accountsChanged', reloadApp);
 ethereum.on('chainChanged', reloadApp);

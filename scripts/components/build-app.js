@@ -1,8 +1,8 @@
-import { buildHeader } from './build-header.js';
-import { buildFooter } from './build-footer.js';
+import buildHeader from './build-header.js';
+import buildFooter from './build-footer.js';
 import BuildDefaultComponents from './misc/build-default.js';
 
-export function buildApp(parent) {
+const buildApp = (parent) => {
   const container = document.createElement('main');
   container.appendChild(buildHeader());
   container.innerHTML += `
@@ -40,7 +40,7 @@ export function buildApp(parent) {
           <h2>
             <i class="fa-solid fa-clock-rotate-left"></i>
             History (
-            <span id="ledger-total">
+            <span id="history-total">
               ${BuildDefaultComponents.placeholder}
             </span>
             )
@@ -135,4 +135,6 @@ export function buildApp(parent) {
   container.appendChild(buildFooter());
 
   parent.appendChild(container);
-}
+};
+
+export default buildApp;

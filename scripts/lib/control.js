@@ -5,7 +5,7 @@ import searchBlock from './func/search-block.js';
 import getBlockHistory from './func/get-block-history.js';
 import clearBlockExplorer from './func/clear-block-explorer.js';
 
-export function appControl() {
+const appControl = (notificationsContainer) => {
   const senderAddressInput = document.querySelector('#sender-address');
   const transactionAmountInput = document.querySelector('#amount');
   const receiverAddressInput = document.querySelector('#receiver-address');
@@ -28,11 +28,12 @@ export function appControl() {
     '#display-ledger-container'
   );
 
-  const walletHistoryCount = document.querySelector('#ledger-total');
+  const walletHistoryCount = document.querySelector('#history-total');
   const blockList = [];
 
   checkBalanceButton.addEventListener('click', () => {
     checkWallet(
+      notificationsContainer,
       senderAddressInput,
       balanceDisplay,
       walletHistoryDisplay,
@@ -48,7 +49,12 @@ export function appControl() {
   });
 
   sendTransactionButton.addEventListener('click', () => {
-    sendFunds(senderAddressInput, transactionAmountInput, receiverAddressInput);
+    sendFunds(
+      notificationsContainer,
+      senderAddressInput,
+      transactionAmountInput,
+      receiverAddressInput
+    );
   });
 
   searchButton.addEventListener('click', () => {
@@ -66,4 +72,6 @@ export function appControl() {
       blockHistoryDisplay
     );
   });
-}
+};
+
+export default appControl;

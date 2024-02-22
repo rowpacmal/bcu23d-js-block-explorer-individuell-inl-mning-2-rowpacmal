@@ -1,4 +1,4 @@
-export function buildFooter() {
+const buildFooter = () => {
   const container = document.createElement('footer');
   container.classList.add('copyright');
   container.innerHTML = `
@@ -8,4 +8,6 @@ export function buildFooter() {
   `;
 
   return container;
-}
+};
+
+export default buildFooter;

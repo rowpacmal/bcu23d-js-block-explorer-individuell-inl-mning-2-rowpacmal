@@ -1,3 +1,7 @@
-const apiKey = 'N4IS9JTVZYEYW721FFD9U7XF6D9F1F4D76';
+const Api = {
+  key: 'N4IS9JTVZYEYW721FFD9U7XF6D9F1F4D76',
+  baseUrl: 'https://api.etherscan.io/',
+  testnetUrl: 'https://api-sepolia.etherscan.io/',
+};
 
-export default apiKey;
+export default Api;
