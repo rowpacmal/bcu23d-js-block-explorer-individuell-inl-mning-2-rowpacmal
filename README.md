@@ -15,6 +15,7 @@ Embark on an enlightening journey deep into the Ethereum blockchain with Etheria
 - [Contributing](#contributing)
 - [License](#license)
 - [Contact](#contact)
+- [Credits](#credits)
 
 ## Installation
 
@@ -47,3 +48,8 @@ This innovative project operates under the liberating principles of the MIT Lice
 ## Contact
 
 Authors LinkedIn: [Here](https://www.linkedin.com/in/rowel-malmstr%C3%B6m-08512a28a/)
+
+## Credits
+
+Photography: [Eberhard Grossgasteiger](https://unsplash.com/s/photos/eberhard-grossgasteiger)
+
