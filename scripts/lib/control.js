@@ -58,7 +58,12 @@ const appControl = (notificationsContainer) => {
   });
 
   searchButton.addEventListener('click', () => {
-    searchBlock(searchBarInput, currentBlockDisplay, blockHistoryDisplay);
+    searchBlock(
+      notificationsContainer,
+      searchBarInput,
+      currentBlockDisplay,
+      blockHistoryDisplay
+    );
   });
 
   checkBlockButton.addEventListener('click', () => {

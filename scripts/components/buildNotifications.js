@@ -37,6 +37,12 @@ const Notifications = {
 
     buildNotification(parentContainer, message);
   },
+
+  notAValidSearch: (parentContainer) => {
+    const message = 'Please enter a valid block number.';
+
+    buildNotification(parentContainer, message);
+  },
 };
 
 export default Notifications;
