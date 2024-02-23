@@ -11,9 +11,7 @@ const getBlockHistory = async (
     blockHistoryDisplay.innerHTML = BuildDefaultComponents.noHistory;
     currentBlockDisplay.innerText = BuildDefaultComponents.loading;
 
-    while (blockList.length > 0) {
-      blockList.pop();
-    }
+    while (blockList.length > 0) blockList.pop();
 
     const latestBlockNumber = await ethereum.request({
       method: 'eth_blockNumber',

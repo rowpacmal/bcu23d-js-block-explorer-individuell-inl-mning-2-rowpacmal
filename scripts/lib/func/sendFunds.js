@@ -1,5 +1,6 @@
 import verifyWalletAddress from './verifyWalletAddress.js';
 import Notifications from '../../components/buildNotifications.js';
+import inputWarning from './inputWarning.js';
 
 const sendFunds = async (
   notificationsContainer,
@@ -7,6 +8,8 @@ const sendFunds = async (
   transactionAmount,
   receiverWalletAddress
 ) => {
+  inputWarning([senderWalletAddress, transactionAmount, receiverWalletAddress]);
+
   if (
     verifyWalletAddress(senderWalletAddress.value) &&
     transactionAmount.value &&

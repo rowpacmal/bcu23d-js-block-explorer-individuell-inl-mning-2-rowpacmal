@@ -2,6 +2,7 @@ import getWalletHistory from './getWalletHistory.js';
 import BuildDefaultComponents from '../../components/misc/BuildDefaultComponents.js';
 import verifyWalletAddress from './verifyWalletAddress.js';
 import Notifications from '../../components/buildNotifications.js';
+import inputWarning from './inputWarning.js';
 
 const checkWallet = async (
   notificationsContainer,
@@ -10,6 +11,8 @@ const checkWallet = async (
   historyDisplay,
   historyCount
 ) => {
+  inputWarning([walletAddress]);
+
   if (verifyWalletAddress(walletAddress.value)) {
     const balance = await ethereum.request({
       method: 'eth_getBalance',

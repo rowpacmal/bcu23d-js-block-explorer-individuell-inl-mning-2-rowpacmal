@@ -2,6 +2,7 @@ import Notifications from '../../components/buildNotifications.js';
 import buildTransactionList from '../../components/buildTransactionList.js';
 import BuildDefaultComponents from '../../components/misc/BuildDefaultComponents.js';
 import clearDisplay from './clearDisplay.js';
+import inputWarning from './inputWarning.js';
 
 const searchBlock = async (
   notificationsContainer,
@@ -9,6 +10,8 @@ const searchBlock = async (
   currentBlockDisplay,
   blockHistoryDisplay
 ) => {
+  inputWarning([searchBarInput]);
+
   if (searchBarInput.value) {
     blockHistoryDisplay.innerHTML = BuildDefaultComponents.noHistory;
     currentBlockDisplay.innerText = BuildDefaultComponents.loading;
