@@ -1,6 +1,6 @@
-import buildHeader from './build-header.js';
-import buildFooter from './build-footer.js';
-import BuildDefaultComponents from './misc/build-default.js';
+import buildHeader from './buildHeader.js';
+import buildFooter from './buildFooter.js';
+import BuildDefaultComponents from './misc/BuildDefaultComponents.js';
 
 const buildApp = (parent) => {
   const container = document.createElement('main');

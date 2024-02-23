@@ -1,9 +1,9 @@
-import checkWallet from './func/check-wallet.js';
-import toggleWalletHistory from './func/toggle-wallet-history.js';
-import sendFunds from './func/send-funds.js';
-import searchBlock from './func/search-block.js';
-import getBlockHistory from './func/get-block-history.js';
-import clearBlockExplorer from './func/clear-block-explorer.js';
+import checkWallet from './func/checkWallet.js';
+import toggleWalletHistory from './func/toggleWalletHistory.js';
+import sendFunds from './func/sendFunds.js';
+import searchBlock from './func/searchBlock.js';
+import getBlockHistory from './func/getBlockHistory.js';
+import clearBlockExplorer from './func/clearBlockExplorer.js';
 
 const appControl = (notificationsContainer) => {
   const senderAddressInput = document.querySelector('#sender-address');

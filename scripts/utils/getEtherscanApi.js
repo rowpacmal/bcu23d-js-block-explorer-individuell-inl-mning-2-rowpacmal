@@ -1,4 +1,4 @@
-import Api from './config.js';
+import Api from './Api.js';
 
 const getEtherscanApi = async (walletAddress) => {
   if (typeof ethereum !== 'undefined') {

@@ -1,5 +1,5 @@
 import { it, expect, describe } from 'vitest';
-import verifyWalletAddress from '../func/verify-wallet-address.js';
+import verifyWalletAddress from '../func/verifyWalletAddress.js';
 
 describe('verifyWalletAddress()', () => {
   it('should not return "null" if the input is a wallet address', () => {

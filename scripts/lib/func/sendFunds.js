@@ -1,5 +1,5 @@
-import verifyWalletAddress from './verify-wallet-address.js';
-import Notifications from '../../components/build-notifications.js';
+import verifyWalletAddress from './verifyWalletAddress.js';
+import Notifications from '../../components/buildNotifications.js';
 
 const sendFunds = async (
   notificationsContainer,
@@ -33,7 +33,7 @@ const sendFunds = async (
       throw error;
     }
   } else {
-    Notifications.notAWalletAddress(notificationsContainer);
+    Notifications.notAValidTransaction(notificationsContainer);
   }
 };
 

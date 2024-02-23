@@ -1,7 +1,7 @@
-import getWalletHistory from './get-wallet-history.js';
-import BuildDefaultComponents from '../../components/misc/build-default.js';
-import verifyWalletAddress from './verify-wallet-address.js';
-import Notifications from '../../components/build-notifications.js';
+import getWalletHistory from './getWalletHistory.js';
+import BuildDefaultComponents from '../../components/misc/BuildDefaultComponents.js';
+import verifyWalletAddress from './verifyWalletAddress.js';
+import Notifications from '../../components/buildNotifications.js';
 
 const checkWallet = async (
   notificationsContainer,

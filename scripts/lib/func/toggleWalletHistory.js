@@ -1,4 +1,4 @@
-import BuildDefaultComponents from '../../components/misc/build-default.js';
+import BuildDefaultComponents from '../../components/misc/BuildDefaultComponents.js';
 
 const toggleWalletHistory = (
   toggleWalletHistoryButton,

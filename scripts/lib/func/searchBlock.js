@@ -1,6 +1,6 @@
-import buildTransactionList from '../../components/build-transaction-list.js';
-import BuildDefaultComponents from '../../components/misc/build-default.js';
-import clearDisplay from './clear-display.js';
+import buildTransactionList from '../../components/buildTransactionList.js';
+import BuildDefaultComponents from '../../components/misc/BuildDefaultComponents.js';
+import clearDisplay from './clearDisplay.js';
 
 const searchBlock = async (
   searchBarInput,
@@ -24,9 +24,9 @@ const searchBlock = async (
     if (transactions.length) {
       clearDisplay(blockHistoryDisplay);
 
-      for (let transaction of transactions) {
-        buildTransactionList(transaction, blockHistoryDisplay);
-      }
+      transactions.forEach((transaction) =>
+        buildTransactionList(transaction, blockHistoryDisplay)
+      );
     } else {
       blockHistoryDisplay.innerHTML = BuildDefaultComponents.noHistory;
     }

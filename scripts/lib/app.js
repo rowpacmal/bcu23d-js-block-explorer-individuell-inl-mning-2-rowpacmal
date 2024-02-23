@@ -1,10 +1,10 @@
-import buildApp from '../components/build-app.js';
-import buildNoWallet from '../components/build-nowallet.js';
-import buildWelcome from '../components/build-welcome.js';
+import buildApp from '../components/buildApp.js';
+import buildNoWallet from '../components/buildNoWallet.js';
+import buildWelcome from '../components/buildWelcome.js';
 import appControl from './control.js';
-import appNoWallet from './no-wallet.js';
+import appNoWallet from './noWallet.js';
 import appWelcome from './welcome.js';
-import Notifications from '../components/build-notifications.js';
+import Notifications from '../components/buildNotifications.js';
 
 const rootContainer = document.querySelector('#root');
 const notificationsContainer = document.querySelector('#notifications');

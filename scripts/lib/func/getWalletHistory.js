@@ -1,7 +1,7 @@
-import buildTransactionList from '../../components/build-transaction-list.js';
-import BuildDefaultComponents from '../../components/misc/build-default.js';
-import getEtherscanApi from '../../utils/etherscanApi.js';
-import clearDisplay from './clear-display.js';
+import buildTransactionList from '../../components/buildTransactionList.js';
+import BuildDefaultComponents from '../../components/misc/BuildDefaultComponents.js';
+import getEtherscanApi from '../../utils/getEtherscanApi.js';
+import clearDisplay from './clearDisplay.js';
 
 const getWalletHistory = async (
   walletAddress,

@@ -1,5 +1,5 @@
-import buildHeader from './build-header.js';
-import buildFooter from './build-footer.js';
+import buildHeader from './buildHeader.js';
+import buildFooter from './buildFooter.js';
 
 const buildNoWallet = (parent) => {
   const container = document.createElement('main');

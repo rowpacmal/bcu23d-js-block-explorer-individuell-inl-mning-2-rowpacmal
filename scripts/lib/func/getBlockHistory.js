@@ -1,6 +1,6 @@
-import buildBlockList from '../../components/build-block-list.js';
-import BuildDefaultComponents from '../../components/misc/build-default.js';
-import clearDisplay from './clear-display.js';
+import buildBlockList from '../../components/buildBlockList.js';
+import BuildDefaultComponents from '../../components/misc/BuildDefaultComponents.js';
+import clearDisplay from './clearDisplay.js';
 
 const getBlockHistory = async (
   blockList,
@@ -35,9 +35,7 @@ const getBlockHistory = async (
 
     clearDisplay(blockHistoryDisplay);
 
-    for (let block of blockList) {
-      buildBlockList(block, blockHistoryDisplay);
-    }
+    blockList.forEach((block) => buildBlockList(block, blockHistoryDisplay));
 
     currentBlockDisplay.innerText =
       BuildDefaultComponents.latestBlocks(blockList);
